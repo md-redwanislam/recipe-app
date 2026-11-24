@@ -70,7 +70,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "You are now logged in.")
-                return redirect("profile")
+                return redirect("/")
 
             form.add_error(None, "Invalid email or password.")
 
@@ -83,7 +83,7 @@ def login_view(request):
         {"form": form}
     )
 
-@login_required
+@login_required(login_url='/auth/login/')
 def profile_view(request):
     user = request.user
 
