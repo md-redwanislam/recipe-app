@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2>Edit Recipe</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h4>Recipe Details</h4>
+        {{ recipe_form.as_p }}
+
+        <hr>
+
+        <h4>Ingredients</h4>
+        {{ ingredient_formset.management_form }}
+        {{ ingredient_formset.non_form_errors }}
+
+        {% for form in ingredient_formset %}
+            <div class="border rounded p-3 mb-3">
+                {{ form.as_p }}
+                {{ form.non_field_errors }}
+            </div>
+        {% endfor %}
+
+        <hr>
+
+        <h4>Instructions</h4>
+        {{ instruction_formset.management_form }}
+        {{ instruction_formset.non_form_errors }}
+
+        {% for form in instruction_formset %}
+            <div class="border rounded p-3 mb-3">
+                {{ form.as_p }}
+                {{ form.non_field_errors }}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">
+            Save Changes
+        </button>
+
+        <a href="{% url 'recipe_detail' recipe.id %}"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+{% endblock %}
