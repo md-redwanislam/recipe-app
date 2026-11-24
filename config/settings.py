@@ -135,14 +135,16 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Cloudinary Configuration
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
     'SECURE': True,
+    'PREFIX': os.getenv('CLOUDINARY_FOLDER'),
 }
 
-
+# Storage Configuration
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
@@ -157,7 +159,6 @@ STORAGES = {
 
 STATIC_URL = 'static/'
 
-MEDIA_URL = '/Recipe/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
