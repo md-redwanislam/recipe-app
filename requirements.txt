@@ -3,7 +3,8 @@ beautifulsoup4==4.15.0
 certifi==2026.11.20
 charset-normalizer==3.5.2
 cloudinary==1.47.0
-Django==5.2.19
+
+Django==4.2.29
 django-bootstrap-v5==1.0.11
 django-cloudinary-storage==0.3.0
 django-tidb==5.2.1
