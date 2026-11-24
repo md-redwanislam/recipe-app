@@ -1,0 +1,71 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2>{{ recipe.title }}</h2>
+    {% if user.is_authenticated and recipe.author_id == user.id %}
+
+    <div class="mb-3">
+        <a href="{% url 'edit_recipe' recipe.id %}"
+           class="btn btn-outline-primary">
+            Edit Recipe
+        </a>
+
+        <a href="{% url 'delete_recipe' recipe.id %}"
+           class="btn btn-outline-danger">
+            Delete Recipe
+        </a>
+    </div>
+
+{% endif %}
+
+    <p class="text-muted">
+        By {{ recipe.author.name }}
+    </p>
+
+    {% if recipe.cover_image %}
+        <img
+            src="{{ recipe.cover_image.url }}"
+            class="img-fluid rounded mb-4"
+            alt="{{ recipe.title }}"
+            style="max-height: 450px;"
+        >
+    {% endif %}
+
+    <h4>Description</h4>
+    <p>{{ recipe.description|linebreaks }}</p>
+
+    <hr>
+
+    <h4>Ingredients</h4>
+    <ul>
+        {% for ingredient in recipe.ingredients.all %}
+            <li>
+                {{ ingredient.quantity }}
+                {{ ingredient.unit }}
+                {{ ingredient.name }}
+            </li>
+        {% empty %}
+            <li>No ingredients added.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h4>Instructions</h4>
+    <ol>
+        {% for instruction in recipe.instructions.all %}
+            <li>{{ instruction.description }}</li>
+        {% empty %}
+            <li>No instructions added.</li>
+        {% endfor %}
+    </ol>
+
+    <a href="{% url 'recipe_list' %}" class="btn btn-secondary">
+        Back to Recipes
+    </a>
+
+</div>
+{% endblock %}
